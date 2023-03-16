@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookShopDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BookPrice" Type="money" Nullable="false" />
+    <Property Name="Available" Type="bit" Nullable="false" />
+    <Property Name="BookTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BookTypes">
+    <Key>
+      <PropertyRef Name="BookTypeId" />
+    </Key>
+    <Property Name="BookTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="MobileNo" Type="bigint" Nullable="false" />
+    <Property Name="SellDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EntryBooks">
+    <Key>
+      <PropertyRef Name="BookId" />
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookId" Type="int" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Book__BookTypeId__286302EC">
+    <End Role="BookTypes" Type="Self.BookTypes" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BookTypes">
+        <PropertyRef Name="BookTypeId" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="BookTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EntryBook__BookI__2B3F6F97">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="EntryBooks" Type="Self.EntryBooks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="EntryBooks">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EntryBook__Custo__2C3393D0">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="EntryBooks" Type="Self.EntryBooks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="EntryBooks">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookShopDbModelStoreContainer">
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookTypes" EntityType="Self.BookTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EntryBooks" EntityType="Self.EntryBooks" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Book__BookTypeId__286302EC" Association="Self.FK__Book__BookTypeId__286302EC">
+      <End Role="BookTypes" EntitySet="BookTypes" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EntryBook__BookI__2B3F6F97" Association="Self.FK__EntryBook__BookI__2B3F6F97">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="EntryBooks" EntitySet="EntryBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EntryBook__Custo__2C3393D0" Association="Self.FK__EntryBook__Custo__2C3393D0">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="EntryBooks" EntitySet="EntryBooks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

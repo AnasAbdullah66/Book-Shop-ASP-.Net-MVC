@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication1.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="row">
+    <div class="col">
+        <h3>Bill Records</h3>
+        <div class="d-flex justify-content-end">
+            @Html.ActionLink("Create New", "Create", "Bill", new { }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+        <table class="table table-bordered">
+            <thead class="bg-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(t => t.Picture)</th>
+                    <th>@Html.DisplayNameFor(t => t.CustomerName)</th>
+                    <th>@Html.DisplayNameFor(t => t.MobileNo)</th>
+                    <th>@Html.DisplayNameFor(t => t.SellDate)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td style="width:70px" class="text-center">
+                            <img src="~/Uploads/@x.Picture" style="width:40px" class="rounded-circle" />
+                        </td>
+                        <td>@Html.DisplayFor(t => x.CustomerName)</td>
+                        <td>@Html.DisplayFor(t => x.MobileNo)</td>
+                        <td>@Html.DisplayFor(t => x.MobileNo)</td>
+                        <td>@Html.DisplayFor(t => x.SellDate)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="border-end-0">&nbsp;</td>
+                        <td colspan="6" class="border-start-0">
+                            <h4>Test</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Book Name</th>
+                                        <th>Price</th>
+                                    </tr>
+
+                                </thead>
+                                @foreach (var y in x.EntryBooks)
+                                {
+                                    <tr>
+                                        <td>@y.Book.BookName</td>
+                                        <td class="text-end">@y.Book.BookPrice.ToString("0.00")</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="2" class="text-end pe-2">
+                                        Total: @x.EntryBooks.Sum(t => t.Book.BookPrice)
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

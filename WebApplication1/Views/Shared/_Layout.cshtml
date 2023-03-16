@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.6.1.js"></script>
+    @RenderSection("styles", false)
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Book Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link  text-white" })
+                    </a>
+                    <a class="nav-item">
+                        @Html.ActionLink("Book", "Index", "Books", new { }, new { @class = "nav-link  text-white" })
+                    </a>
+                    <a class="nav-item">
+                        @Html.ActionLink("Book Type", "Index", "BookTypes", new { }, new { @class = "nav-link  text-white" })
+                    </a>
+                    <a class="nav-item">
+                        @Html.ActionLink("Bill", "Index", "Bill", new { }, new { @class = "nav-link  text-white" })
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+    <script src="~/Scripts/bootstrap.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

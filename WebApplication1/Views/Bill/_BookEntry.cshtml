@@ -1,0 +1,15 @@
+﻿
+@model WebApplication1.ViewModels.BookModel
+<div class="form-group row mb-1">
+    @Html.LabelFor(x => x.BookId, new { @class = "col-form-label col-2" })
+    <div class="col-4">
+        @Html.DropDownListFor(x => x.BookId, new SelectList(ViewBag.Books, "BookId", "BookName"), "Select one", new { @class = "form-select select" })
+        @Html.ValidationMessageFor(x => x.BookId, "", new { @class = "text-danger" })
+    </div>
+    @Html.LabelFor(x => x.BookPrice, new { @class = "col-form-label col-2" })
+    <div class="col-4">
+
+        @Html.TextBoxFor(x => x.BookPrice, new { @class = "form-control price",@readonly = "true" })
+
+    </div>
+</div>
